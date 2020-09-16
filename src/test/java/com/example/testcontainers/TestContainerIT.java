@@ -13,13 +13,21 @@ import org.springframework.test.context.ContextConfiguration;
 public class TestContainerIT {
 
     private static final String MAP_NAME = "testcontainers";
-    private static final String HELLO_WORLD_KEY= "hello_world";
+    private static final String HELLO_WORLD_KEY = "hello_world";
+    private static final String RESULT_TXT = "Hello World From Hazelcast";
+
 
     @Autowired
     private HazelcastInstance hazelcastInstance;
 
     @Test
     public void contextUp() {
-        System.out.println(hazelcastInstance.getMap(MAP_NAME).get(HELLO_WORLD_KEY));
+        // Given
+
+        // When
+        String result = (String) hazelcastInstance.getMap(MAP_NAME).get(HELLO_WORLD_KEY);
+
+        // Then
+        Assertions.assertEquals(RESULT_TXT, result);
     }
 }
